@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Happy Birthday</title>
+
+    <!-- Google Fonts (optional; remove if offline) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+
+<body>
+
+    <!-- Confetti -->
+    <div class="confetti" id="confetti"></div>
+
+    <!-- Header -->
+    <header>
+        <h1 style="color: white;">🎂 Happy Birthday🎂 </h1>
+        <p style="color: white;">To the most beautiful soul I know. You make my life magical ✨</p>
+
+        <!-- Happy Birthday Song Button -->
+        <button class="celebrate-btn" onclick="playSong()">🎵 Play Birthday Song 🎵</button>
+
+        <audio id="bday-audio">
+            <source src="./hbday.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </header>
+
+    <!-- Celebrate Button -->
+    <button class="celebrate-btn" onclick="triggerCelebration()">🎉 Click here for a surprise! 🎉</button>
+
+    <!-- Surprise Popup -->
+    <div class="popup" id="popup">
+        <h2>💌 A Little Surprise for You!</h2>
+        <video controls autoplay muted loop width="80%"
+            style="border-radius: 1rem; box-shadow: 0 0 15px rgba(255, 105, 180, 0.4);">
+            <source src="./surprize.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <p>You are my sunshine, my reason, and my forever. Happy Birthday baby 💖</p>
+    </div>
+
+    <!-- Flip Card 1 -->
+    <div class="flip-card-wrapper">
+        <div class="flip-card" id="card1">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://media3.giphy.com/media/tGKDwckg5rr9PkqFBe/giphy.webp" alt="Front Side">
+                </div>
+                <div class="flip-card-back">
+                    <img src="https://media2.giphy.com/media/TQhVNBzHkLjEvfV6ob/giphy.webp" alt="Back Side">
+                </div>
+            </div>
+        </div>
+    </div>
+    <p style="text-align: center; margin-top: 0;">This is one of my favorite memories of us 💝</p>
+
+    <!-- Flip Card 2 -->
+    <div class="flip-card-wrapper">
+        <div class="flip-card" id="card2">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://media4.giphy.com/media/JH6TIYsmQJ8FFDuDHI/200.webp" alt="Front Side">
+                </div>
+                <div class="flip-card-back">
+                    <img src="https://media2.giphy.com/media/6hk6Gzl06p9t9HcNaz/giphy.webp" alt="Back Side">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Love Letter Button -->
+    <button class="celebrate-btn" onclick="showLoveLetter()">💌 My Wishes to You</button>
+
+    <!-- Love Letter Section (Initially Hidden) -->
+    <div id="loveLetter" class="card love-letter" style="display: none;">
+        <h3 style="color: #ff3e6c;">💌 A Letter from Me to You</h3>
+        <p id="typewriter"></p>
+    </div>
+
+    <!-- Memories Intro -->
+    <div id="memoriesIntro" class="card" style="text-align: center;">
+        <img src="https://media3.giphy.com/media/5UClVovgaIZw4C8LME/200.webp" alt="Cute gif"
+            style="max-width: 100%; border-radius: 1rem;" />
+        <button class="celebrate-btn" onclick="showMemories()">💑 See Our Memories</button>
+    </div>
+
+    <!-- Hidden Memories Section -->
+    <div id="memoriesSection" style="display: none;">
+        <div class="card">
+            <h3 style="color: #0f5cc8;">Memories</h3>
+            <div class="gallery-container">
+                <div class="gallery" id="photoGallery">
+                    <img src="https://media2.giphy.com/media/Td9uhfywrKakCoF0wo/giphy.webp" alt="Memory 1" />
+                    <img src="https://media2.giphy.com/media/Ie9XYbEyw5YrP1J5QB/giphy.webp" alt="Memory 2" />
+                    <img src="https://media2.giphy.com/media/W6Lwg2xvTr6tJpuSTd/giphy.webp" alt="Memory 3" />
+                    <img src="https://media1.giphy.com/media/kigfYxdEa5s1ziA2h1/200.webp" alt="Memory 4" />
+                    <img src="https://media0.giphy.com/media/3bzI1Z7Uv0zhvrFQsi/200.webp" alt="Memory 4" />
+                </div>
+                <button class="nav-btn left" onclick="scrollGallery(-1)">←</button>
+                <button class="nav-btn right" onclick="scrollGallery(1)">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Celebrate Page Link -->
+    <a href="celebrate.html" target="_self">
+        <button class="celebrate-btn">Lets Celebrate!</button>
+    </a>
+
+    <!-- Hearts Container -->
+    <div id="hearts"></div>
+
+    <!-- Footer -->
+    <footer>
+        Made with all my heart ❤️ by your love
+    </footer>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
