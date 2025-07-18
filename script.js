@@ -165,10 +165,44 @@ function initFlipCards() {
     });
 }
 
-/* ---------------------------
-   Init on Load
-   --------------------------- */
-window.addEventListener('DOMContentLoaded', () => {
-    initFlipCards();
-    startAutoScroll();
-});
+// adding new heart Animation
+
+const heartsContainer = document.getElementById("hearts");
+
+// Color gradients for hearts
+const gradients = [
+    "linear-gradient(45deg, #ff4d6d, #ff85a1)",
+    "linear-gradient(45deg, #f39c12, #f1c40f)",
+    "linear-gradient(45deg, #8e44ad, #9b59b6)",
+    "linear-gradient(45deg, #3498db, #5dade2)",
+    "linear-gradient(45deg, #16a085, #1abc9c)",
+    "linear-gradient(45deg, #e75480, #ff69b4)"
+];
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+
+    // Random properties
+    const size = Math.floor(Math.random() * 15 + 10) + "px"; // 10px–25px
+    const duration = Math.random() * 4 + 6 + "s"; // 6–10s
+    const drift = Math.random() * 300 - 150 + "px"; // horizontal sway
+    const color = gradients[Math.floor(Math.random() * gradients.length)];
+
+    heart.style.left = "0px";
+    heart.style.setProperty("--size", size);
+    heart.style.setProperty("--duration", duration);
+    heart.style.setProperty("--x", drift);
+    heart.style.setProperty("--color", color);
+
+    heartsContainer.appendChild(heart);
+
+    // Remove after animation ends
+    setTimeout(() => {
+        heart.remove();
+    }, parseFloat(duration) * 1000);
+}
+
+// Continuous heart flow
+setInterval(createHeart, 400);
+// final js to work with jerry and hearts 
