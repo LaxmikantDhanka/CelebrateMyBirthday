@@ -1,0 +1,359 @@
+        :root {
+            /* Base cake width (max) & responsive scaling */
+            --cake-max: 220px;
+            --cake-scale: min(calc(100vw - 2rem), var(--cake-max));
+            --cake-height-step: 50px;
+            /* fallback */
+            --cake-height: clamp(32px, 6vh, 50px);
+            --cake-radius: 20px;
+            --brand-pink: #e9670ac8;
+            --brand-pink-dark: #ff6a00c8;
+            --banner-grad: linear-gradient(to right, #ff6a00c8, #ee0978a2);
+        }
+
+
+
+
+
+
+
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            min-height: 100dvh;
+            /* account for dynamic mobile chrome */
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive, system-ui, sans-serif;
+            background: linear-gradient(270deg, #b38ed1, #fad0c4);
+            background-size: 800% 800%;
+            animation: backgroundShift 20s ease infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 140px);
+            /* space for fixed controls */
+            color: #fff;
+        }
+
+        @keyframes backgroundShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Respect user reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            body {
+                animation: none;
+            }
+        }
+
+        h1 {
+            color: #fff;
+            font-size: clamp(1.75rem, 5vw, 2.75rem);
+            text-align: center;
+            line-height: 1.1;
+            margin: 0.25em 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        .banner {
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+            border-radius: 3rem;
+            background: var(--banner-grad);
+            box-shadow: 0 4px 10px #2118180d;
+            margin: 1.25rem;
+            width: min(90%, 480px);
+        }
+
+        /* Cake ------------------------------------------------------------ */
+        .cake-wrapper {
+
+            position: relative;
+            margin-top: 5rem;
+            /* vertical spacing below banner */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+            /* cake not interactive; change if needed */
+            z-index: 1;
+        }
+
+        .cake {
+            display: flex;
+            flex-direction: column-reverse;
+            /* bottom layer first visually bottom */
+            align-items: center;
+            gap: 2px;
+            pointer-events: none;
+        }
+
+        .layer {
+            position: relative;
+            height: var(--cake-height);
+            background: #ffc966;
+            border-radius: var(--cake-radius);
+            box-shadow: 0 4px #d2691e;
+            margin: 5px 0;
+        }
+
+        /* Responsive widths via % of base scale */
+
+
+        .layer-2 {
+            width: calc(var(--cake-scale) * 0.82);
+        }
+
+        .layer-3 {
+            width: calc(var(--cake-scale) * 0.68);
+        }
+
+        .layer-4 {
+            width: calc(var(--cake-scale) * 0.5);
+        }
+
+        .frosting {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: #f6a3b0;
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* Candles: using flex layout instead of hard-coded pixel positions */
+        .layer-4 .candle-row {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: flex-end;
+            pointer-events: auto;
+        }
+
+        .candle {
+            position: relative;
+            width: 10px;
+            height: 30px;
+            background: #1976d2;
+            border-radius: 2px;
+        }
+
+        .flame {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 10px;
+            height: 20px;
+            background: radial-gradient(ellipse at center, #ffeb3b 0%, #f57f17 80%);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            display: none;
+            animation: flicker 0.3s infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: translateX(-50%) scale(1.2);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .flame {
+                animation: none;
+            }
+        }
+
+        /* Balloons --------------------------------------------------------- */
+        #balloon-container {
+            position: fixed;
+            inset: 0;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 55px;
+            border-radius: 50%;
+            animation: flyUp 2s ease-in forwards;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background: #555;
+            transform: translateX(-50%);
+        }
+
+        @keyframes flyUp {
+            to {
+                bottom: 110%;
+                opacity: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .balloon {
+                animation-duration: 0.01s;
+            }
+        }
+
+        /* Confetti canvas -------------------------------------------------- */
+        canvas#confetti {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        /* Controls --------------------------------------------------------- */
+        .controls {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 5;
+            width: min(90%, 320px);
+        }
+
+        .controls button,
+        .controls a.button-link {
+            display: block;
+            width: 100%;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            background-color: var(--brand-pink);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(62, 14, 23, 0.45);
+            transition: transform 0.15s ease;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .controls button:active,
+        .controls a.button-link:active {
+            transform: scale(0.96);
+            background-color: var(--brand-pink-dark);
+        }
+
+        /* Popup ------------------------------------------------------------ */
+        #popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            display: none;
+            z-index: 10;
+            max-width: min(90%, 400px);
+            color: #333;
+            line-height: 1.35;
+            font-size: 1rem;
+        }
+
+        #popup img {
+            max-width: 100px;
+            display: block;
+            margin: 10px auto;
+        }
+
+        #popupClose {
+            margin-top: 10px;
+            background: var(--brand-pink);
+            border: none;
+            padding: 5px 14px;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        #popupClose:active {
+            transform: scale(0.96);
+        }
+
+        /* Links ------------------------------------------------------------ */
+        a {
+            text-decoration: none;
+        }
+
+        /* Small-screen tweaks ---------------------------------------------- */
+        @media (max-width: 480px) {
+            :root {
+                --cake-radius: 16px;
+            }
+
+            #popup {
+                font-size: 0.95rem;
+            }
+
+            .controls button,
+            .controls a.button-link {
+                font-size: 1rem;
+                padding: 10px 18px;
+            }
+        }
+
+        /* Ultra-small ---------------------- */
+        @media (max-width: 360px) {
+            :root {
+                --cake-scale: calc(100vw - 1rem);
+            }
+
+            .balloon {
+                width: 32px;
+                height: 44px;
+            }
+        }
