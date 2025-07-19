@@ -135,20 +135,20 @@ function showMemories() {
 /* ---------------------------
    Floating Hearts
    --------------------------- */
-setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
+// setInterval(() => {
+//     const heart = document.createElement("div");
+//     heart.className = "heart";
 
-    // Random X drift between -50vw and +50vw
-    const x = (Math.random() * 100 - 50).toFixed(2) + "vw";
-    heart.style.setProperty("--x", x);
+//     // Random X drift between -50vw and +50vw
+//     const x = (Math.random() * 100 - 50).toFixed(2) + "vw";
+//     heart.style.setProperty("--x", x);
 
-    const heartsWrapper = document.getElementById("hearts");
-    if (!heartsWrapper) return;
-    heartsWrapper.appendChild(heart);
+//     const heartsWrapper = document.getElementById("hearts");
+//     if (!heartsWrapper) return;
+//     heartsWrapper.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 6000);
-}, 600);
+//     setTimeout(() => heart.remove(), 6000);
+// }, 600);
 
 /* ---------------------------
    Flip Cards (auto unflip after 4s)
@@ -202,6 +202,51 @@ function createHeart() {
         heart.remove();
     }, parseFloat(duration) * 1000);
 }
+
+//  flippedcards start here
+function flipWithSparkle(section) {
+    // Flip the card
+    section.classList.toggle('flipped');
+
+    // Create sparkles on the back
+    // const sparkleContainer = section.querySelector('.sparkle-container');
+    // if (!sparkleContainer) return;
+
+    // for (let i = 0; i < 30; i++) {
+    //     const sparkle = document.createElement('div');
+    //     sparkle.className = 'sparkle';
+    //     sparkle.style.left = Math.random() * 100 + '%';
+    //     sparkle.style.top = Math.random() * 30 + '%';
+    //     sparkle.style.background = ['#ffd700', '#ff69b4', '#87cefa'][Math.floor(Math.random() * 3)];
+    //     sparkleContainer.appendChild(sparkle);
+
+    //     // Remove after animation
+    //     setTimeout(() => sparkle.remove(), 1200);
+    // }
+}
+
+//    flip card section
+// const card = document.getElementById('card');
+
+// card.addEventListener('click', () => {
+//     card.classList.add('flipped');
+
+//     setTimeout(() => {
+//         card.classList.remove('flipped');
+//     }, 4000); // 4 seconds
+// });
+
+const cards = document.querySelectorAll('.flip-card');
+
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        card.classList.add('flipped');
+        setTimeout(() => {
+            card.classList.remove('flipped');
+        }, 4000);
+    });
+});
+
 
 // Continuous heart flow
 setInterval(createHeart, 400);
